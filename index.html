@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roofing</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background-color: #f0f0f0;
+    }
+    .roofing-container {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .roofing-container h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .roofing-container label {
+      display: block;
+      margin: 0.5rem 0 0.25rem;
+    }
+    .roofing-container input, .roofing-container select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 0.25rem;
+      border: 1px solid #ccc;
+    }
+    .roofing-container button {
+      background-color: #007bff;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
+    .roofing-container button:hover {
+      background-color: #0056b3;
+    }
+    .roofing-container .result {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="roofing-container">
+    <h1>Roofing Cost Estimator</h1>
+    <label for="area">Roof Area (in sq. meters):</label>
+    <input type="number" id="area" placeholder="Enter roof area" />
+
+    <label for="material">Material Type:</label>
+    <select id="material">
+      <option value="asphalt">Asphalt</option>
+      <option value="metal">Metal</option>
+      <option value="tile">Tile</option>
+    </select>
+
+    <button onclick="calculateCost()">Estimate Cost</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateCost() {
+      const area = parseFloat(document.getElementById("area").value);
+      const material = document.getElementById("material").value;
+      let ratePerSqMeter;
+
+      switch (material) {
+        case "asphalt":
+          ratePerSqMeter = 50;
+          break;
+        case "metal":
+          ratePerSqMeter = 100;
+          break;
+        case "tile":
+          ratePerSqMeter = 150;
+          break;
+        default:
+          ratePerSqMeter = 0;
+      }
+
+      if (isNaN(area) || area <= 0) {
+        document.getElementById("result").innerText = "Please enter a valid area.";
+        return;
+      }
+
+      const cost = area * ratePerSqMeter;
+      document.getElementById("result").innerText = `Estimated Cost: $${cost.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
